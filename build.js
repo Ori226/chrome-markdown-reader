@@ -139,7 +139,7 @@ ${hljsDarkRaw}
   const distManifest = {
     "manifest_version": 3,
     "name": "GitHub Markdown Reader",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Render Markdown files and raw text with authentic GitHub styling, alerts, syntax highlighting, math, and outline.",
     "icons": {
       "16": "assets/icon16.png",
@@ -163,7 +163,13 @@ ${hljsDarkRaw}
     },
     "content_scripts": [
       {
-        "matches": ["<all_urls>"],
+        "matches": [
+          "file:///*",
+          "https://raw.githubusercontent.com/*",
+          "https://gist.githubusercontent.com/*",
+          "https://gitlab.com/*/raw/*",
+          "https://bitbucket.org/*/raw/*"
+        ],
         "js": ["content.js"],
         "css": ["content.css"],
         "run_at": "document_end"

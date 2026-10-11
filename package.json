@@ -1,6 +1,6 @@
 {
   "name": "chrome-markdown-reader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Chrome extension to render markdown files and raw URLs with GitHub-faithful styling, alerts, syntax highlighting, math, and outline.",
   "scripts": {
     "build": "node build.js",
