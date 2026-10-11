@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Markdown Reader</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <header class="popup-header">
+      <div class="popup-brand">
+        <svg class="brand-icon" viewBox="0 0 16 16" width="18" height="18" fill="currentColor">
+          <path fill-rule="evenodd" d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15V4.15C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"></path>
+        </svg>
+        <span class="brand-title">Markdown Reader</span>
+      </div>
+      <span class="brand-badge">GitHub Style</span>
+    </header>
+
+    <div class="popup-section">
+      <button type="button" id="toggleRenderBtn" class="primary-btn">
+        <span class="btn-text">Toggle Render on Tab</span>
+      </button>
+    </div>
+
+    <div class="popup-section settings-grid">
+      <div class="setting-item">
+        <label for="themeSelect">Theme</label>
+        <select id="themeSelect" class="form-select">
+          <option value="auto">System Default</option>
+          <option value="light">GitHub Light</option>
+          <option value="dark">GitHub Dark</option>
+        </select>
+      </div>
+
+      <div class="setting-item">
+        <label for="widthSelect">Layout Width</label>
+        <select id="widthSelect" class="form-select">
+          <option value="standard">Standard (1012px)</option>
+          <option value="full">Full Width (100%)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="popup-section">
+      <div class="setting-row">
+        <span>Document Outline</span>
+        <button type="button" id="toggleOutlineBtn" class="secondary-btn">Toggle</button>
+      </div>
+    </div>
+
+    <div class="popup-section info-card">
+      <div class="info-header">
+        <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
+          <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path>
+        </svg>
+        <strong>Local Markdown Files (file://)</strong>
+      </div>
+      <p class="info-text">
+        To view local <code>.md</code> files, open <code>chrome://extensions</code>, find this extension, and enable <strong>"Allow access to file URLs"</strong>.
+      </p>
+    </div>
+
+    <footer class="popup-footer">
+      <span>Shortcut: <kbd>Alt</kbd> + <kbd>M</kbd></span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

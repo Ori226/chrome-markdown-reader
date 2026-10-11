@@ -1,0 +1,38 @@
+{
+  "name": "chrome-markdown-reader",
+  "version": "1.0.0",
+  "description": "Chrome extension to render markdown files and raw URLs with GitHub-faithful styling, alerts, syntax highlighting, math, and outline.",
+  "scripts": {
+    "build": "node build.js",
+    "package": "npm run build && cd dist && zip -r ../chrome-markdown-reader.zip . && cd ..",
+    "generate-icons": "node scripts/generate-icons.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "chrome-extension",
+    "markdown",
+    "github",
+    "gfm",
+    "viewer",
+    "syntax-highlighting",
+    "katex",
+    "mermaid"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dompurify": "^3.2.4",
+    "github-markdown-css": "^5.8.1",
+    "highlight.js": "^11.11.1",
+    "katex": "^0.16.21",
+    "marked": "^15.0.7",
+    "mermaid": "^11.5.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.308",
+    "@types/dompurify": "^3.0.5",
+    "@types/marked": "^5.0.2",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.2"
+  }
+}
