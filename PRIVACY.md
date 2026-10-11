@@ -15,7 +15,7 @@ GitHub Markdown Reader is an open-source, client-side browser extension designed
 - `storage`: Required only to persist UI preferences (theme, outline open state, width).
 - `contextMenus`: Adds the optional right-click "Render as GitHub Markdown" shortcut.
 - `activeTab` / `scripting`: Required to inject the markdown viewer on demand when you click the extension action.
-- Specific Host Permissions: Required to format markdown documents on local files (`file:///`) and raw repository hosts (`raw.githubusercontent.com`, `gist.githubusercontent.com`, `gitlab.com`, `bitbucket.org`).
+- Specific File Permissions: The extension requests access strictly to local files (`file:///`) so it can format markdown files opened from your computer. It requests no web or internet host permissions.
 
 ## 4. Contact
 For questions or issues regarding this extension, please open an issue in the project's repository.
