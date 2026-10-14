@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "GitHub Markdown Reader",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Render local Markdown files with authentic GitHub styling, alerts, syntax highlighting, math, and outline.",
   "icons": {
     "16": "assets/icon16.png",

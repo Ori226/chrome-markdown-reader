@@ -50,16 +50,19 @@
       </div>
     </div>
 
-    <div class="popup-section info-card">
+    <div id="fileAccessCard" class="popup-section info-card">
       <div class="info-header">
-        <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
+        <svg id="fileAccessIcon" viewBox="0 0 16 16" width="14" height="14" fill="currentColor">
           <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path>
         </svg>
-        <strong>Local Markdown Files (file://)</strong>
+        <strong id="fileAccessTitle">Local File Access</strong>
       </div>
-      <p class="info-text">
-        To view local <code>.md</code> files, open <code>chrome://extensions</code>, find this extension, and enable <strong>"Allow access to file URLs"</strong>.
+      <p id="fileAccessText" class="info-text">
+        To view local <code>.md</code> files, enable "Allow access to file URLs".
       </p>
+      <button type="button" id="enableFileAccessBtn" class="action-link-btn">
+        Open Settings to Enable
+      </button>
     </div>
 
     <footer class="popup-footer">

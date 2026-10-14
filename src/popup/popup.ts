@@ -16,6 +16,33 @@ document.addEventListener('DOMContentLoaded', async () => {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   const tabId = tab?.id;
 
+  // Check file scheme access permission
+  const fileAccessCard = document.getElementById('fileAccessCard');
+  const fileAccessTitle = document.getElementById('fileAccessTitle');
+  const fileAccessText = document.getElementById('fileAccessText');
+  const enableFileAccessBtn = document.getElementById('enableFileAccessBtn') as HTMLButtonElement;
+
+  if (typeof chrome !== 'undefined' && chrome.extension && chrome.extension.isAllowedFileSchemeAccess) {
+    chrome.extension.isAllowedFileSchemeAccess((isAllowed) => {
+      if (isAllowed) {
+        if (fileAccessCard) fileAccessCard.classList.add('success');
+        if (fileAccessTitle) fileAccessTitle.textContent = 'Local File Access: Enabled';
+        if (fileAccessText) fileAccessText.textContent = 'Ready to view local .md files.';
+        if (enableFileAccessBtn) enableFileAccessBtn.style.display = 'none';
+      } else {
+        if (fileAccessCard) fileAccessCard.classList.remove('success');
+        if (fileAccessTitle) fileAccessTitle.textContent = 'Action Required: Enable File Access';
+        if (fileAccessText) fileAccessText.textContent = 'Chrome requires you to toggle "Allow access to file URLs" for local .md files.';
+        if (enableFileAccessBtn) enableFileAccessBtn.style.display = 'block';
+      }
+    });
+  }
+
+  enableFileAccessBtn?.addEventListener('click', () => {
+    const extId = chrome.runtime.id;
+    chrome.tabs.create({ url: `chrome://extensions/?id=${extId}` });
+  });
+
   // Load current settings from storage
   chrome.storage.local.get(['gmr_settings'], (result: { gmr_settings?: StoredSettings }) => {
     if (result.gmr_settings) {

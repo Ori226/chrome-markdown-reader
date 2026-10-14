@@ -1,6 +1,6 @@
 // Background service worker for GitHub Markdown Reader
 
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener((details) => {
   // Create context menu item
   chrome.contextMenus.create({
     id: 'gmr-render-page',
@@ -20,6 +20,19 @@ chrome.runtime.onInstalled.addListener(() => {
       });
     }
   });
+
+  // Check if file URL access is already granted; if not, open onboarding page
+  if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
+    if (chrome.extension && chrome.extension.isAllowedFileSchemeAccess) {
+      chrome.extension.isAllowedFileSchemeAccess((isAllowed) => {
+        if (!isAllowed) {
+          chrome.tabs.create({ url: chrome.runtime.getURL('welcome.html') });
+        }
+      });
+    } else {
+      chrome.tabs.create({ url: chrome.runtime.getURL('welcome.html') });
+    }
+  }
 });
 
 // Handle context menu clicks

@@ -52,6 +52,18 @@ async function build() {
     sourcemap: false,
   });
 
+  // Welcome page script
+  await esbuild.build({
+    entryPoints: [path.join(__dirname, 'src/popup/welcome.ts')],
+    outfile: path.join(distDir, 'welcome.js'),
+    bundle: true,
+    minify: true,
+    format: 'iife',
+    platform: 'browser',
+    target: ['chrome100'],
+    sourcemap: false,
+  });
+
   // 3. Process CSS
   console.log('3. Processing CSS bundles...');
 
@@ -130,16 +142,17 @@ ${hljsDarkRaw}
   fs.writeFileSync(path.join(distDir, 'content.css'), combinedContentCss);
 
   // 4. Copy static popup files
-  console.log('4. Copying popup files...');
+  console.log('4. Copying popup and welcome files...');
   fs.copyFileSync(path.join(__dirname, 'src/popup/popup.html'), path.join(distDir, 'popup.html'));
   fs.copyFileSync(path.join(__dirname, 'src/popup/popup.css'), path.join(distDir, 'popup.css'));
+  fs.copyFileSync(path.join(__dirname, 'src/popup/welcome.html'), path.join(distDir, 'welcome.html'));
 
   // 5. Generate dist manifest with relative paths
   console.log('5. Generating dist manifest...');
   const distManifest = {
     "manifest_version": 3,
     "name": "GitHub Markdown Reader",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Render local Markdown files with authentic GitHub styling, alerts, syntax highlighting, math, and outline.",
     "icons": {
       "16": "assets/icon16.png",

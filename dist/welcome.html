@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to GitHub Markdown Reader</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --fg: #1f2328;
+      --border: #d0d7de;
+      --card-bg: #f6f8fa;
+      --accent: #0969da;
+      --accent-hover: #0856b3;
+      --success: #1a7f37;
+      --warning: #9a6700;
+      --warning-bg: #fff8c5;
+      --warning-border: #eac54f;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --fg: #e6edf3;
+        --border: #30363d;
+        --card-bg: #161b22;
+        --accent: #2f81f7;
+        --accent-hover: #388bfd;
+        --success: #3fb950;
+        --warning: #d29922;
+        --warning-bg: #2d2200;
+        --warning-border: #bb8009;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 40px 20px;
+      background-color: var(--bg);
+      color: var(--fg);
+      display: flex;
+      justify-content: center;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 680px;
+      width: 100%;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header img {
+      width: 48px;
+      height: 48px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .badge {
+      font-size: 12px;
+      padding: 2px 8px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-weight: normal;
+    }
+
+    .status-banner {
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .status-banner.warning {
+      background: var(--warning-bg);
+      border: 1px solid var(--warning-border);
+      color: var(--fg);
+    }
+
+    .status-banner.success {
+      background: rgba(26, 127, 55, 0.1);
+      border: 1px solid var(--success);
+      color: var(--fg);
+    }
+
+    .status-banner h3 {
+      margin: 0 0 6px 0;
+      font-size: 16px;
+    }
+
+    .status-banner p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .step-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.15s ease;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .preview-box {
+      margin-top: 14px;
+      padding: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .preview-toggle {
+      width: 36px;
+      height: 20px;
+      background: #2ea043;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .preview-toggle::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+    }
+
+    kbd {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: monospace;
+    }
+
+    .features-list {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .features-list ul {
+      padding-left: 20px;
+    }
+
+    .features-list li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="assets/icon128.png" alt="Icon">
+      <div>
+        <h1>Welcome to GitHub Markdown Reader <span class="badge">v1.0.3</span></h1>
+      </div>
+    </div>
+
+    <!-- Live Status Banner -->
+    <div id="statusBanner" class="status-banner warning">
+      <div>
+        <h3 id="statusTitle">Action Required: Enable Local File Access</h3>
+        <p id="statusDesc">
+          Chrome requires one manual permission toggle before extensions can read local <code>file:///</code> files.
+        </p>
+      </div>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="step-card" id="stepCard">
+      <div class="step-header">
+        <span class="step-num">1</span>
+        <h3 class="step-title">Open Extension Settings</h3>
+      </div>
+      <p>
+        Click the button below to open Chrome's settings for this extension:
+      </p>
+      <button type="button" id="openSettingsBtn" class="btn">
+        Open Settings for GitHub Markdown Reader
+      </button>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">2</span>
+        <h3 class="step-title">Turn ON "Allow access to file URLs"</h3>
+      </div>
+      <p>
+        Scroll down on the settings tab and switch the toggle to ON:
+      </p>
+      <div class="preview-box">
+        <span class="preview-toggle"></span>
+        <span><strong>Allow access to file URLs</strong> (must be enabled)</span>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-card">
+      <div class="step-header">
+        <span class="step-num">3</span>
+        <h3 class="step-title">You're Ready!</h3>
+      </div>
+      <p>
+        Drag and drop any <code>.md</code> file into Chrome or press <kbd>Ctrl</kbd> + <kbd>O</kbd> to open a file. It will automatically render with authentic GitHub styles, alerts, math, outline, and code highlighting!
+      </p>
+    </div>
+
+    <div class="features-list">
+      <h3>Quick Shortcuts</h3>
+      <ul>
+        <li><kbd>Alt</kbd> + <kbd>M</kbd>: Toggle between rendered GitHub Markdown and raw text.</li>
+        <li><strong>Outline button</strong>: View the collapsible table of contents with scrollspy.</li>
+        <li><strong>Theme button</strong>: Switch between System, Light, and Dark mode anytime.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="welcome.js"></script>
+</body>
+</html>
